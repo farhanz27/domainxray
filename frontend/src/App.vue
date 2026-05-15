@@ -319,7 +319,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
     <!-- ── Header ────────────────────────────────────────────────────────── -->
     <header class="border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-sm sticky top-0 z-10">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-3">
-        <div class="size-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shrink-0">
+        <div class="size-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
           <svg class="size-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
           </svg>
@@ -364,7 +364,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           <div class="relative flex-1">
             <input v-model="domain" @keydown="onKey" type="text"
               placeholder="Enter domain name (e.g. google.com)"
-              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-cyan-600/70 focus:ring-1 focus:ring-cyan-600/40 transition-colors"/>
+              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-violet-600/70 focus:ring-1 focus:ring-violet-600/40 transition-colors"/>
             <button v-if="domain" @click="clearDomain"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-300 transition-colors">
               <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -374,7 +374,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           </div>
           <button @click="lookup"
             :disabled="loading || !domain.trim() || (mode !== 'whois' && !!resolverError)"
-            class="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors shrink-0 inline-flex items-center gap-2">
+            class="px-5 py-3 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors shrink-0 inline-flex items-center gap-2">
             <svg v-if="!loading" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
             </svg>
@@ -409,7 +409,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
                   autocomplete="off" spellcheck="false" :placeholder="RESOLVER_PLACEHOLDER"
                   :class="['w-full h-8 rounded-lg border bg-gray-900 px-2.5 pr-7 text-xs font-mono text-gray-300 placeholder:text-gray-600 outline-none transition-[border-color,box-shadow]',
                     resolverError ? 'border-red-500/50 focus:border-red-500/60 focus:ring-1 focus:ring-red-500/20'
-                                  : 'border-gray-800 focus:border-cyan-600/50 focus:ring-1 focus:ring-cyan-600/20']"
+                                  : 'border-gray-800 focus:border-violet-600/50 focus:ring-1 focus:ring-violet-600/20']"
                   @input="e => { validateResolver(e.target.value); if (!resolverError) error = '' }"
                   @keydown="onKey"/>
                 <button v-if="resolver.trim()" @click="resolver=''; resolverError=''"
@@ -436,11 +436,11 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
         </div>
         <textarea v-model="bulkInput" rows="6"
           placeholder="google.com&#10;cloudflare.com&#10;github.com"
-          class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-700 focus:outline-none focus:border-cyan-600/70 focus:ring-1 focus:ring-cyan-600/40 transition-colors resize-y font-mono leading-relaxed"/>
+          class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-700 focus:outline-none focus:border-violet-600/70 focus:ring-1 focus:ring-violet-600/40 transition-colors resize-y font-mono leading-relaxed"/>
         <div class="flex items-center gap-2">
           <button @click="runBulk"
             :disabled="bulkLoading || !bulkInput.trim() || bulkDomainCount > BULK_LIMIT"
-            class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2">
+            class="px-4 py-2 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2">
             <svg v-if="!bulkLoading" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/>
             </svg>
@@ -466,7 +466,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           <div class="relative flex-1">
             <input v-model="cmpD1" @keydown="e => e.key==='Enter' && runCompare()" type="text"
               placeholder="First domain (e.g. google.com)"
-              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-cyan-600/70 focus:ring-1 focus:ring-cyan-600/40 transition-colors"/>
+              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-violet-600/70 focus:ring-1 focus:ring-violet-600/40 transition-colors"/>
             <button v-if="cmpD1" @click="cmpD1 = ''; cmpR1 = null"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-300 transition-colors">
               <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -478,7 +478,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           <div class="relative flex-1">
             <input v-model="cmpD2" @keydown="e => e.key==='Enter' && runCompare()" type="text"
               placeholder="Second domain (e.g. cloudflare.com)"
-              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-cyan-600/70 focus:ring-1 focus:ring-cyan-600/40 transition-colors"/>
+              class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 pr-10 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-violet-600/70 focus:ring-1 focus:ring-violet-600/40 transition-colors"/>
             <button v-if="cmpD2" @click="cmpD2 = ''; cmpR2 = null"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-300 transition-colors">
               <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -489,7 +489,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
         </div>
         <div class="flex items-center gap-2">
           <button @click="runCompare" :disabled="cmpLoading || !cmpD1.trim() || !cmpD2.trim()"
-            class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2">
+            class="px-4 py-2 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2">
             <svg v-if="!cmpLoading" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
             </svg>
@@ -755,7 +755,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
               <span class="text-[11px] text-gray-600 uppercase tracking-wider block mb-2">Name Servers</span>
               <div class="flex flex-wrap gap-2">
                 <span v-for="ns in whoisData.name_servers" :key="ns"
-                  class="text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-1 rounded-lg">{{ ns }}</span>
+                  class="text-xs font-mono bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2 py-1 rounded-lg">{{ ns }}</span>
               </div>
             </div>
             <div v-if="whoisData.status?.length" class="px-5 py-4">
@@ -872,7 +872,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           </div>
           <div class="grid grid-cols-2 divide-x divide-gray-800/60">
             <div v-for="(res, idx) in [cmpR1, cmpR2]" :key="idx" class="px-4 py-4">
-              <p class="text-xs font-mono text-cyan-400 mb-3 flex items-center gap-1.5">
+              <p class="text-xs font-mono text-violet-400 mb-3 flex items-center gap-1.5">
                 <span class="text-gray-700 text-[10px]">{{ idx + 1 }}</span>
                 {{ idx === 0 ? cmpD1 : cmpD2 }}
               </p>
@@ -900,7 +900,7 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           </div>
           <div class="grid grid-cols-2 divide-x divide-gray-800/60">
             <div v-for="(res, idx) in [cmpR1, cmpR2]" :key="idx" class="px-4 py-4 space-y-3.5">
-              <p class="text-xs font-mono text-cyan-400 flex items-center gap-1.5">
+              <p class="text-xs font-mono text-violet-400 flex items-center gap-1.5">
                 <span class="text-gray-700 text-[10px]">{{ idx + 1 }}</span>
                 {{ idx === 0 ? cmpD1 : cmpD2 }}
               </p>
