@@ -60,7 +60,7 @@ class WhoisResult:
 
     def to_dict(self) -> dict:
         d = asdict(self)
-        del d["raw"]
+        d["raw_text"] = d.pop("raw")
         if d["error"] is None:
             del d["error"]
         return d

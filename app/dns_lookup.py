@@ -6,7 +6,7 @@ import dns.name
 
 from app.models import DNSRecord, DNSResult
 
-DEFAULT_RECORD_TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "PTR", "SRV"]
+DEFAULT_RECORD_TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "PTR", "SRV", "CAA"]
 
 
 class DNSLookup:
