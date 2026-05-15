@@ -42,8 +42,8 @@ git clone <repo-url> && cd domainxray
 docker compose up --build
 ```
 
-- **App + API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
+- **App + API**: http://localhost:8001
+- **API Docs**: http://localhost:8001/docs
 
 ## Local Development
 
@@ -52,7 +52,7 @@ docker compose up --build
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn server:api --port 3000 --reload
+uvicorn server:api --port 3001 --reload
 ```
 
 ### Frontend
@@ -63,7 +63,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. The Vite dev server proxies `/api` requests to the backend on port 3000.
+Open http://localhost:5173. The Vite dev server proxies `/api` requests to the backend on port 3001.
 
 ## Usage
 
@@ -100,7 +100,7 @@ GET /api/dns?domain=google.com&types=A,MX&resolver=1.1.1.1
 GET /api/whois?domain=google.com
 ```
 
-Interactive API docs at http://localhost:8000/docs.
+Interactive API docs at http://localhost:8001/docs.
 
 ### As a Library
 
