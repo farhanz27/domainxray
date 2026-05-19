@@ -3,7 +3,6 @@ import { ref, computed, onMounted } from 'vue'
 
 const DEFAULT_DNS_HINT = '8.8.8.8'
 const RESOLVER_PLACEHOLDER = 'Defaults to 8.8.8.8'
-const MAX_RECENT = 10
 const MAX_GEO_IPS = 6
 const BULK_LIMIT = 20
 
@@ -26,7 +25,6 @@ const dmarc      = ref(null)
 // ── UI state ─────────────────────────────────────────────────────────────────
 const showRaw    = ref(false)
 const copiedKey  = ref('')
-const recentSearches = ref([])
 
 // ── Bulk state ────────────────────────────────────────────────────────────────
 const bulkInput   = ref('')
@@ -149,23 +147,11 @@ function syncUrl() {
 }
 
 onMounted(() => {
-  try { recentSearches.value = JSON.parse(localStorage.getItem('dx_recent') || '[]') } catch {}
   const p = new URLSearchParams(window.location.search)
   const d = p.get('domain'), m = p.get('mode')
   if (m && ['full','dns','whois'].includes(m)) mode.value = m
   if (d) { domain.value = d; lookup() }
 })
-
-// ── Recent searches ───────────────────────────────────────────────────────────
-function pushRecent(d) {
-  const t = d.trim().toLowerCase()
-  recentSearches.value = [t, ...recentSearches.value.filter(x => x !== t)].slice(0, MAX_RECENT)
-  try { localStorage.setItem('dx_recent', JSON.stringify(recentSearches.value)) } catch {}
-}
-function removeRecent(d) {
-  recentSearches.value = recentSearches.value.filter(x => x !== d)
-  try { localStorage.setItem('dx_recent', JSON.stringify(recentSearches.value)) } catch {}
-}
 
 // ── Clipboard ─────────────────────────────────────────────────────────────────
 async function copy(text, key) {
@@ -206,7 +192,7 @@ async function lookup() {
   }
   loading.value = true; error.value = ''; result.value = null
   ssl.value = null; geo.value = {}; dmarc.value = null; showRaw.value = false
-  syncUrl(); pushRecent(d)
+  syncUrl()
   const r = resolver.value.trim()
   const rp = r ? `&resolver=${encodeURIComponent(r)}` : ''
   const endpoints = {
@@ -386,19 +372,16 @@ function cmpWhoisField(result, key) { return (result?.whois ?? result)?.[key] ||
           </button>
         </div>
 
-        <!-- Recent + Resolver row -->
+        <!-- Examples + Resolver row -->
         <div class="flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
-          <div v-if="recentSearches.length" class="flex flex-wrap gap-1.5">
-            <span class="text-[11px] text-gray-600 self-center mr-0.5">Recent:</span>
-            <button v-for="r in recentSearches" :key="r"
-              @click="domain = r; lookup()"
-              class="group flex items-center gap-1 text-xs bg-gray-900 border border-gray-800 hover:border-gray-700 hover:bg-gray-800/50 text-gray-500 hover:text-gray-300 rounded-full px-2.5 py-1 transition-all">
-              {{ r }}
-              <span @click.stop="removeRecent(r)"
-                class="text-gray-700 hover:text-gray-400 leading-none transition-colors">×</span>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] text-gray-600 self-center mr-0.5">Try:</span>
+            <button v-for="ex in ['github.com', 'cloudflare.com', 'google.com']" :key="ex"
+              @click="domain = ex; lookup()"
+              class="text-xs bg-gray-900 border border-gray-800 hover:border-gray-700 hover:bg-gray-800/50 text-gray-500 hover:text-gray-300 rounded-full px-2.5 py-1 transition-all">
+              {{ ex }}
             </button>
           </div>
-          <div v-else class="flex-1"/>
 
           <!-- Custom resolver -->
           <div v-show="mode !== 'whois'" class="flex flex-col gap-1 sm:items-end shrink-0">
